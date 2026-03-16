@@ -13,3 +13,4 @@ $dotenv->load();
 $config = require __DIR__ . '/config/database.php';
 
 $database = new Database($config);
+$pdo = $database->getConnection();
