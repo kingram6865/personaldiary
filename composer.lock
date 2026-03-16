@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae9eb11cfae140a423da1a30096f1816",
+    "content-hash": "c92c3c4cd4a74bc76b32c02eb0f10dc7",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -166,6 +166,7 @@
             ],
             "description": "Reusable PDO connection manager for PHP projects",
             "transport-options": {
+                "symlink": false,
                 "relative": false
             }
         },
