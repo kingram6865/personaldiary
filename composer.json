@@ -2,7 +2,10 @@
   "repositories": [
     {
       "type": "path",
-      "url": "/home/kingram/PROJECTS/php/dblibrary"
+      "url": "/home/kingram/PROJECTS/php/dblibrary",
+      "options": {
+        "symlink": false
+      }
     }
   ],
   "require": {
