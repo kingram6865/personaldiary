@@ -8,4 +8,6 @@ return [
     '/personal/diary/list' => 'listEntries',
     '/personal/diary/search' => 'searchEntries',
     '/personal/diary/title-search' => 'titleSearchEntries',
+    '/personal/diary/view' => 'viewEntry',
+    '/personal/diary/edit' => 'editEntry',
 ];
