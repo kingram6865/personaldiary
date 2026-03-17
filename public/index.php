@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 $services = require __DIR__ . '/../bootstrap.php';
 $pdo = $services['pdo'];
-require_once __DIR__ . '/../src/Database/dmlCommands.php';
+
 $routes = require __DIR__ . '/../src/routing/routes.php';
 
 $path = rtrim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH), '/');
