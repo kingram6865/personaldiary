@@ -5,9 +5,11 @@ declare(strict_types=1);
 use InvalidArgumentException;
 use Throwable;
 
-use function App\Database\createDiaryEntry;
+use App\Database\DiaryRepositoryClass;
 
-return static function (PDO $pdo): array {
+return static function (\PDO $pdo): array {
+  $repo = new DiaryRepositoryClass($pdo);
+
   $message = null;
   $error = null;
 
@@ -31,12 +33,13 @@ return static function (PDO $pdo): array {
           throw new InvalidArgumentException('Keywords is required.');
       }
 
-      $newId = createDiaryEntry($pdo, [
-        'title' => $formData['title'],
-        'keywords' => $formData['keywords'],
-        'full_text' => $formData['full_text'],
-        'note' => $formData['note'],
-      ]);
+      $newId = $repo->create($formData);
+      // $newId = createDiaryEntry($pdo, [
+      //   'title' => $formData['title'],
+      //   'keywords' => $formData['keywords'],
+      //   'full_text' => $formData['full_text'],
+      //   'note' => $formData['note'],
+      // ]);
 
       $message = "Diary entry created successfully. objid: {$newId}";
     } catch (Throwable $e) {

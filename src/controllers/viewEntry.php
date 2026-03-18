@@ -2,20 +2,22 @@
 
 declare(strict_types=1);
 
-use function App\Database\getDiaryEntryById;
+use App\Database\DiaryRepositoryClass;
 
 return static function (\PDO $pdo): array {
-    $objid = isset($_GET['objid']) ? (int) $_GET['objid'] : 0;
-    $entry = false;
+  $repo = new DiaryRepositoryClass($pdo);
 
-    if ($objid > 0) {
-        $entry = getDiaryEntryById($pdo, $objid);
-    }
+  $objid = isset($_GET['objid']) ? (int) $_GET['objid'] : 0;
+  $entry = false;
 
-    return [
-        'title' => 'View Diary Entry',
-        'contentView' => __DIR__ . '/../../views/pages/viewEntry.php',
-        'objid' => $objid,
-        'entry' => $entry,
-    ];
+  if ($objid > 0) {
+    $entry = $repo->getById($objid);
+  }
+
+  return [
+    'title' => 'View Diary Entry',
+    'contentView' => __DIR__ . '/../../views/pages/viewEntry.php',
+    'objid' => $objid,
+    'entry' => $entry,
+  ];
 };

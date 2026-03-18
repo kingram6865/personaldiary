@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-use function App\Database\getDiaryEntriesByKeyword;
+use App\Database\DiaryRepositoryClass;
 
 return static function (PDO $pdo): array {
+    $repo = new DiaryRepositoryClass($pdo);
+
     $keyword = trim($_GET['keyword'] ?? '');
     $entries = [];
 
     if ($keyword !== '') {
-        $entries = getDiaryEntriesByKeyword($pdo, $keyword);
+        $entries = $repo->searchByKeyword($keyword);
     }
 
     return [
