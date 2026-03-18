@@ -87,4 +87,58 @@ class DiaryRepositoryClass
             'note' => normalizeNullableString($data['note'] ?? null),
         ]);
     }
+
+    public function searchByKeyword(string $keyword): array
+    {
+      $like = '%' . $keyword . '%';
+
+      return fetchAll($this->pdo, '
+        SELECT
+          objid,
+          DATE_FORMAT(entry_date, "%Y-%m-%d %H:%i:%s") AS recorded,
+          title,
+          keywords,
+          full_text,
+          total_expenses,
+          total_credits,
+          total_income,
+          income_source,
+          word_count,
+          note,
+          notes_word_count
+        FROM diary
+        WHERE keywords LIKE :keywords_like
+        OR full_text LIKE :full_text_like
+        OR note LIKE :note_like
+        ORDER BY entry_date DESC, objid DESC
+        ', [
+          'keywords_like' => $like,
+          'full_text_like' => $like,
+          'note_like' => $like,
+        ]);
+    }
+
+    public function searchByPartialTitle(string $partialTitle): array
+    {
+      return fetchAll($this->pdo, '
+        SELECT
+          objid,
+          entry_date,
+          title,
+          keywords,
+          full_text,
+          total_expenses,
+          total_credits,
+          total_income,
+          income_source,
+          word_count,
+          note,
+          notes_word_count
+        FROM diary
+        WHERE title LIKE :title
+        ORDER BY entry_date DESC, objid DESC
+      ', [
+        'title' => '%' . $partialTitle . '%',
+      ]);
+    }
 }
