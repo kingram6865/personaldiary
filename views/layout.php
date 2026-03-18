@@ -7,7 +7,7 @@
 <body>
   <?php require __DIR__ . '/partials/nav.php'; ?>
   <header>
-    <h1>My Site</h1>
+    <h1>Personal Diary</h1>
   </header>
 
   <main>
@@ -15,7 +15,7 @@
   </main>
 
   <footer>
-    <small>Footer content</small>
+    <small>&copy; sdl.org</small>
   </footer>
 </body>
 </html>
